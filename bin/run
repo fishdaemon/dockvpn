@@ -1,14 +1,14 @@
-#!/bin/sh
-set -e
-
+#!/bin/bash -e
+printenv
+echo "CN $CN"
 [ -d /dev/net ] ||
     mkdir -p /dev/net
 [ -c /dev/net/tun ] ||
     mknod /dev/net/tun c 10 200
-
 cd /etc/openvpn
 [ -f dh.pem ] ||
     openssl dhparam -out dh.pem 512
+
 [ -f key.pem ] ||
     openssl genrsa -out key.pem 2048
 chmod 600 key.pem
